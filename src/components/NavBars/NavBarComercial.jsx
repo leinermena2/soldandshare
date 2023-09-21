@@ -3,8 +3,8 @@ import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ButtonGroup from '../Buttons/MultipleButton';
 
-function NavBarRegister() {
-  const buttonTitles = ['Iniciar Sesion'];
+const NavBarComercial = () => {
+  const buttonTitles = ['User online'];
   const styleData = {
     backgroundColor: "red"
   }
@@ -21,4 +21,4 @@ function NavBarRegister() {
   );
 }
 
-export default NavBarRegister;
+export default NavBarComercial;

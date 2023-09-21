@@ -25,4 +25,9 @@ const createClients = async (datas) => {
     return datos;
 }
 
-export { createClients };
+const getInfoClient = () => {
+  return axios.get(`http://localhost:3000/api/clientsView`);
+}
+
+
+export { createClients, getInfoClient };

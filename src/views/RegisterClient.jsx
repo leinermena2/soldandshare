@@ -1,33 +1,32 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ClientRegisterForm from '../components/Forms/ClientRegisterForm';
 import NavBarRegister from "../components/Navbars/NavBarRegister";
 import Footer from "../components/Footer/Footer";
 import background from "/img/backgroundLogin.jpeg";
+import StepperRegister from '../components/Forms/StepperRegister';
 
 const centeredContainer = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  minHeight: '100vh', 
-  background: '#ffffff', 
+  minHeight: '100vh',
+  background: '#ffffff',
+  width: '80%',
+  flexDirection: 'column', // Para centrar verticalmente
 }
 
-// const backgroundImages = {
-//   backgroundImage: `url(${background})` , 
-//   // backgroundSize: 'cover',
-//   // backgroundPosition: 'center',
-// }
-
+const pageContainer = {
+  minHeight: '100vh', // Esto asegura que todo el contenido tenga al menos la altura de la ventana
+}
 
 const RegisterClient = () => {
   return (
-    <div style={{ width: "100%", backgroundImage: `url(${background})` }}>
-     <NavBarRegister />
-    <div style={{...centeredContainer}}>
-      <ClientRegisterForm />
-    </div>
-    <Footer />
+    <div style={{ ...pageContainer }}>
+      <NavBarRegister />
+      <div style={{ ...centeredContainer }}>
+        <StepperRegister />
+      </div>
+      <Footer />
     </div>
   );
 };

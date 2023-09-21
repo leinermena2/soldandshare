@@ -42,7 +42,6 @@ const formContainer = {
   border: "2px solid #aeaeae",
   width: "700px",
   margin: "0 auto",
-  width: "100%",
 };
 
 const RegistrationForm = () => {
@@ -151,12 +150,8 @@ const RegistrationForm = () => {
         }
       }
       addUser(objInfoUserRegister);          
- 
         break;
-  
-  
      }
-    
     
   };
 

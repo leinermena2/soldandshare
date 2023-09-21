@@ -5,6 +5,7 @@ import Register from './views/Register';
 import RegisterClient from './views/RegisterClient';
 import Login from './views/Login';
 import Admin from './views/Admin';
+import Comercial from './views/Comercial';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/registerClient" element={<RegisterClient />} />
         <Route exact path="/admin" element={<Admin />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/comercial" element={<Comercial />} />
       </Routes>
     </Router>
   );
