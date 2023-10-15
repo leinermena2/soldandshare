@@ -12,15 +12,19 @@ import JobInformationForm from './JobInformationForm';
 import ModalConfirm from "../Modals/ModalConfirm";
 //context
 import { ClientContext } from "../../context/ClientContext";
-const steps = ['Informacion General', 'Informacion de interes', 'Datos laborales'];
+import { IsMobileContext } from '../../context/IsMobileContext';
 //services
 import { createClients } from '../../services/clients';
+
+const steps = ['Informacion General', 'Informacion de interes', 'Datos laborales'];
 
 export default function StepperRegister() {
   const { clientsFields } = useContext(ClientContext);
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
   const [modalOpen, setModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [messageFormsFoot, setMessageFormsFoot] = useState('')
 
 
   const isStepOptional = (step) => {
@@ -46,11 +50,23 @@ export default function StepperRegister() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const styleDivContainerForm = {
+    marginTop: '13px',
+    border: '1px solid #ccc',
+    borderRadius: '10px',
+    padding: '13px',
+    paddingBottom: '18px',
+    margin: '10px',
+    width: '100%',
+    height: '100%'
+  }
+
+
+
+
   const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
+      throw new Error("No puedes saltarte este epacio porque es obligatorio.");
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -152,6 +168,16 @@ export default function StepperRegister() {
     console.log(objDataInformation);
   }
 
+  useEffect(() => {
+    if (activeStep === 0){
+      setMessageFormsFoot('*Completar todos los datos')
+    }else if (activeStep === 1){
+      setMessageFormsFoot('*Queremos conocerte un poco mas')
+    }else{
+      setMessageFormsFoot('*Estamos por terminar')
+    }
+  }, [activeStep]);
+
   return (
     <Box sx={{ width: '90%' }}>
       <Stepper activeStep={activeStep}>
@@ -160,7 +186,7 @@ export default function StepperRegister() {
           const labelProps = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
+              <Typography variant="caption"></Typography>
             );
           }
           if (isStepSkipped(index)) {
@@ -186,13 +212,19 @@ export default function StepperRegister() {
       ) : (
         <React.Fragment>
             {activeStep === 0 ? (
+              <div style={styleDivContainerForm}>
                 <ClientRegisterForm />
+              </div>
                 ) : activeStep === 1 ? (
-                <GeneralInformationClientForm />
+                  <div style={styleDivContainerForm}>
+                    <GeneralInformationClientForm />
+                  </div>
                 ) : (
-               <JobInformationForm />
+                  <div style={styleDivContainerForm}>
+                    <JobInformationForm />
+                  </div>
                 )}
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Typography sx={{ mt: 2, mb: 1, color: "red" }}>{messageFormsFoot}</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
@@ -203,12 +235,6 @@ export default function StepperRegister() {
               Regresar
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Saltar
-              </Button>
-            )}
-
             <Button onClick={activeStep === steps.length - 1 ? () => handleSubmitData(0) : handleNext}>
               {activeStep === steps.length - 1 ? 'Enviar datos' : 'Siguiente'}
             </Button>

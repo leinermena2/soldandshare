@@ -1,9 +1,11 @@
-import jwt_decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 import React, { createContext, useState } from "react";
 
 export const ClientContext = createContext();
 
 export function ClientContextProvider(props) {
+  const [clients, setClients] = useState([]);
+  const [clientsProcessHistory, setClientsProcessHistory] = useState([]);
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
@@ -45,6 +47,28 @@ export function ClientContextProvider(props) {
   const [personalReferent, setPersonalReferent] = useState("");
   const [familyReferent, setFamilyReferent] = useState("");
   const [status, setStatus] = useState(1);
+
+  //code para guardar info de progreso
+  const [creditResponseId, setCreditResponseId] = useState();
+  const [statusProcessId, setStatusProcessId] = useState();
+  const [optionAlternativeId, setOptionAlternativeId] = useState();
+  const [detailsOperation, setDetailsOperation] = useState();
+  const [clientIdProcess, setClientIdProcess] = useState();
+
+  //code
+
+  const clientProcessInfo = {
+    creditResponseId,
+    statusProcessId,
+    optionAlternativeId,
+    detailsOperation,
+    clientIdProcess,
+    setCreditResponseId,
+    setStatusProcessId,
+    setOptionAlternativeId,
+    setDetailsOperation,
+    setClientIdProcess,
+  };
 
   const clientsFields = {
     name,
@@ -128,10 +152,14 @@ export function ClientContextProvider(props) {
     setTimeWorking,
     setPersonalReferent,
     setFamilyReferent,
-    setStatus
+    setStatus,
+    clients,
+    setClients,
+    clientProcessInfo,
+    clientsProcessHistory,
+    setClientsProcessHistory, 
   };
 
-  
   return (
     <ClientContext.Provider value={{ clientsFields }}>
       {props.children}

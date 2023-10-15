@@ -11,7 +11,7 @@ const centeredContainer = {
   alignItems: 'center',
   minHeight: '100vh',
   background: '#ffffff',
-  width: '80%',
+  width: '100%',
   flexDirection: 'column', // Para centrar verticalmente
 }
 

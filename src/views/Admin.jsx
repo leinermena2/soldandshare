@@ -4,6 +4,7 @@ function Admin() {
   return (
     <div>
         <NavBarHome />
+        
     </div>
   )
 }

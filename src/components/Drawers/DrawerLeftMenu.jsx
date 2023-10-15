@@ -50,6 +50,18 @@ const DrawerLeftMenu = ({optionsList = []}) => {
               </ListItemIcon>
               <ListItemText primary="Clientes" />
             </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <GroupIcon />
+              </ListItemIcon>
+              <ListItemText primary="Panel Comercial" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <GroupIcon />
+              </ListItemIcon>
+              <ListItemText primary="Administrador de listas" />
+            </ListItem>
             {/* Agrega más opciones de menú si es necesario */}
           </List>
         </div>

@@ -237,8 +237,10 @@ const JobInformationForm = () => {
                         fullWidth
                     />
                 </Grid>
-                <Grid item xs={12}>
-                    <FormControl fullWidth>
+                <Grid item xs={6}>
+                    <FormControl fullWidth style={{
+                        marginBottom: '10px',
+                    }}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={["DateTimePicker"]}>
                                 <DateTimePicker

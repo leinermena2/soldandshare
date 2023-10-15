@@ -41,7 +41,7 @@ const ClientRegisterForm = () => {
     let newSetter = "set" + param
     clientsFields[newSetter](value);
   }
-  
+
   const loadList = (type, setter) => {
     getListType(type)
       .then((response) => {
@@ -75,6 +75,7 @@ const ClientRegisterForm = () => {
   }, []);
 
 
+
   return (
     <Container maxWidth="lg">
 
@@ -85,6 +86,7 @@ const ClientRegisterForm = () => {
             name="Name"
             onKeyUp={handleInputChange}
             fullWidth
+            variant="standard"
           />
         </Grid>
         <Grid item xs={5}>
@@ -92,6 +94,7 @@ const ClientRegisterForm = () => {
             label="Apellido"
             name="LastName"
             onChange={handleInputChange}
+            variant="standard"
             fullWidth
           />
         </Grid>
@@ -100,6 +103,7 @@ const ClientRegisterForm = () => {
             label="Edad"
             name="Age"
             onChange={handleInputChange}
+            variant="standard"
             fullWidth
           />
         </Grid>
@@ -109,6 +113,7 @@ const ClientRegisterForm = () => {
             <Select
               name="TypeDocument"
               onChange={handleInputChange}
+              variant="standard"
             >
               {listTypeDocument.map((state) => (
                 <MenuItem key={state.id} value={state.id}>
@@ -123,6 +128,7 @@ const ClientRegisterForm = () => {
             label="Número de Documento"
             name="DocumentNumber"
             onChange={handleInputChange}
+            variant="standard"
             fullWidth
           />
         </Grid>
@@ -131,6 +137,7 @@ const ClientRegisterForm = () => {
             <InputLabel>Departamento de residencia</InputLabel>
             <Select
               name="StateId"
+              variant="standard"
               onChange={(event) => {
                 const selectedStateId = event.target.value;
                 loadPartner(selectedStateId);
@@ -150,6 +157,7 @@ const ClientRegisterForm = () => {
             <InputLabel>Ciudad de residencia</InputLabel>
             <Select
               name="CityId"
+              variant="standard"
               onChange={handleInputChange}
             >
               {listCitys?.map((state) => (
@@ -164,6 +172,7 @@ const ClientRegisterForm = () => {
           <TextField
             label="Correo Electrónico"
             name="Email"
+            variant="standard"
             onChange={handleInputChange}
             fullWidth
           />
@@ -172,6 +181,7 @@ const ClientRegisterForm = () => {
           <TextField
             label="Teléfono"
             name="Phone"
+            variant="standard"
             onChange={handleInputChange}
             fullWidth
           />
@@ -183,6 +193,7 @@ const ClientRegisterForm = () => {
             <InputLabel>Ciudad de nacimiento</InputLabel>
             <Select
               name="BornSiteId"
+              variant="standard"
               onChange={handleInputChange}
             >
               {listCitysLoad?.map((state) => (
@@ -200,6 +211,7 @@ const ClientRegisterForm = () => {
             <InputLabel>Ciudad de expedición del documento</InputLabel>
             <Select
               name="SiteExpeditionId"
+              variant="standard"
               onChange={handleInputChange}
             >
               {listCitysLoad?.map((state) => (
@@ -214,9 +226,10 @@ const ClientRegisterForm = () => {
         <Grid item xs={6}>
           <FormControl fullWidth>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["DateTimePicker"]}>
+              <DemoContainer variant="standard" components={["DateTimePicker"]}>
                 <DateTimePicker
                   name="BornDate"
+                  
                   onChange={(event) => handleChangeDatePicker(event,"BornDate")}
                   label="Fecha de nacimiento"
                   InputProps={{

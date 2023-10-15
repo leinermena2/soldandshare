@@ -8,17 +8,19 @@ import {
   TableBody,
   Paper,
 } from "@mui/material";
-import { getInfoClient } from "../../services/clients";
-import ModalGeneral from "../Modals/ModalGeneral";
+import { getProcessByClient } from "../../services/clients";
 import { ClientContext } from "../../context/ClientContext";
+import { GeneralContext } from "../../context/GeneralContext";
 
-const TableClients = () => {
+const TableClientsHistoryProcess = () => {
   let { clientsFields } = useContext(ClientContext);
+  let { objInfo } = useContext(GeneralContext);
+  const clientId = objInfo.idClientProcess;
   useEffect(() => {
     async function fetchClients() {
       try {
-        const dataClient = await getInfoClient();
-        clientsFields.setClients(dataClient.data);
+        const dataClient = await getProcessByClient(clientId);
+        clientsFields.setClientsProcessHistory(dataClient.data);
       } catch (error) {
         console.error("Error fetching clients:", error);
       }
@@ -38,49 +40,37 @@ const TableClients = () => {
         >
           <TableRow>
             <TableCell style={{ color: "#fff", fontWeight: "bold" }}>
-              Nombre
+              Fecha
             </TableCell>
             <TableCell style={{ color: "#fff", fontWeight: "bold" }}>
-              Documento
+              Credito
             </TableCell>
             <TableCell style={{ color: "#fff", fontWeight: "bold" }}>
-              Telefono
+              Estado
             </TableCell>
             <TableCell style={{ color: "#fff", fontWeight: "bold" }}>
-              Correo
+              Alternativa
             </TableCell>
             <TableCell style={{ color: "#fff", fontWeight: "bold" }}>
-              Ciudad
+              Detalles
             </TableCell>
             <TableCell style={{ color: "#fff", fontWeight: "bold" }}>
-              Actions
+              Usuario
             </TableCell>
             {/* Agrega más encabezados de columna según tus datos */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {clientsFields.clients.map((client) => (
-            <TableRow key={client.id}>
+          {clientsFields.clientsProcessHistory.map((clientProcess) => (
+            <TableRow key={clientProcess.id}>
               <TableCell>
-                {client.name} {client.last_name}
-              </TableCell>
-              <TableCell>{client.document_number}</TableCell>
-              <TableCell>{client.phone}</TableCell>
-              <TableCell>{client.email}</TableCell>
-              <TableCell>{client.city}</TableCell>
-              <TableCell>
-                <ModalGeneral
-                  title={client.document_number}
-                  btnConfirm={"Procesar"}
-                  width={1300}
-                  height="700px"
-                  scrollable={true}
-                  btnClose={"Cerrar Ventana"}
-                  btnOpen={"Detalles"}
-                  idClient={client.id}
-              
-                />
-              </TableCell>
+                {(clientProcess.dateActualitation && new Date(clientProcess.dateActualitation).toLocaleDateString()) || 'Fecha no disponible'}
+</TableCell>
+              <TableCell>{clientProcess.credit_response_item}</TableCell>
+              <TableCell>{clientProcess.status_process_item}</TableCell>
+              <TableCell>{clientProcess.option_alternative_item}</TableCell>
+              <TableCell>{clientProcess.details}</TableCell>
+              <TableCell>{clientProcess.user_name}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -89,4 +79,4 @@ const TableClients = () => {
   );
 };
 
-export default TableClients;
+export default TableClientsHistoryProcess;

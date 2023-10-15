@@ -4,10 +4,35 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 
 const AlertBox = ({ type, message }) => {
-  const backgroundColor = type === 'error' ? '#f1c5c2' : '#caf5cc'; 
-  const color = type === 'error' ? '#f3463a' : '#18721d'; 
-  const icon = type === 'error' ? <ErrorIcon /> : <CheckCircleIcon />; 
-
+  let backgroundColor,color,icon;
+  switch (type) {
+    case 'error':
+      color = '#f3463a'
+      backgroundColor = '#f1c5c2'
+      icon = <ErrorIcon />
+      break;
+    case 'success':
+      color = '#18721d'
+      backgroundColor = '#caf5cc'
+      icon = <CheckCircleIcon />
+      break;
+    case 'warning':
+      color = '#9e8203'
+      backgroundColor = '#fded9b'
+      icon = <ErrorIcon />
+      break;
+    case 'advise':
+      color = '#004696'
+      backgroundColor = '#cad1fa'
+      icon = <ErrorIcon />
+      break;
+  
+    default:
+      color = '#18721d'
+      backgroundColor = '#caf5cc'
+      icon = <CheckCircleIcon />
+      break;
+  }
   return (
     <Box
       sx={{
